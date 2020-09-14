@@ -1,3 +1,5 @@
+NDK Version: 17
+LLVM Version: 6.0
 
 This project was built and tested in Kali Nethunter environment, but in theory it should work in termux and/or any linux proot/chroot environment.
 Possibly on Raspberry PI too as it is aarch64 aswell.
