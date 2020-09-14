@@ -7,7 +7,9 @@ your path should be:
 /data/local/nhsystem/kali-arm64/
 
 so open keli terminal:
+
 cd ..
+
 git clone https://github.com/sterling0x1/android-ndk-aarch64-host-LLVM6.0-Ollvm-Armariris.git
 
 You can also download the tarball and use the command added at release to unpack it.
@@ -15,9 +17,11 @@ You can also download the tarball and use the command added at release to unpack
 add ndk to path, use terminal or filemanager. .bashrc is in your "root" folder.
 
 cd
+
 nano .bashrc
 
 add this line to the bottom:
+
 PATH="/usr/sbin:/usr/bin:/sbin:/bin:/system/xbin:/system/bin:/android-ndk-r17/"
 
 restart your terminal session and you're good to go.
