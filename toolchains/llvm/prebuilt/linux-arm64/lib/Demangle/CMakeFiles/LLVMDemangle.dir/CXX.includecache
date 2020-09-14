@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/ollvm6.0/ollvm-tll/include/llvm/Demangle/Demangle.h
+cstddef
+-
+
+/ollvm6.0/ollvm-tll/include/llvm/Support/Compiler.h
+llvm/Config/llvm-config.h
+/ollvm6.0/ollvm-tll/include/llvm/Support/llvm/Config/llvm-config.h
+sal.h
+-
+sanitizer/msan_interface.h
+-
+sanitizer/asan_interface.h
+-
+
+/ollvm6.0/ollvm-tll/lib/Demangle/ItaniumDemangle.cpp
+llvm/Demangle/Demangle.h
+/ollvm6.0/ollvm-tll/lib/Demangle/llvm/Demangle/Demangle.h
+llvm/Support/Compiler.h
+/ollvm6.0/ollvm-tll/lib/Demangle/llvm/Support/Compiler.h
+algorithm
+-
+cctype
+-
+cstdlib
+-
+cstring
+-
+numeric
+-
+string
+-
+vector
+-
+
+include/llvm/Config/llvm-config.h
+

@@ -1,0 +1,41 @@
+file(REMOVE_RECURSE
+  "../../libLLVMLanaiCodeGen.a"
+  "../../libLLVMLanaiCodeGen.pdb"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiAsmPrinter.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiDelaySlotFiller.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiFrameLowering.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiISelDAGToDAG.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiISelLowering.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiInstrInfo.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiMCInstLower.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiMachineFunctionInfo.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiMemAluCombiner.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiRegisterInfo.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiSelectionDAGInfo.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiSubtarget.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiTargetMachine.cpp.o"
+  "CMakeFiles/LLVMLanaiCodeGen.dir/LanaiTargetObjectFile.cpp.o"
+  "LanaiGenAsmMatcher.inc"
+  "LanaiGenAsmMatcher.inc.tmp"
+  "LanaiGenAsmWriter.inc"
+  "LanaiGenAsmWriter.inc.tmp"
+  "LanaiGenCallingConv.inc"
+  "LanaiGenCallingConv.inc.tmp"
+  "LanaiGenDAGISel.inc"
+  "LanaiGenDAGISel.inc.tmp"
+  "LanaiGenDisassemblerTables.inc"
+  "LanaiGenDisassemblerTables.inc.tmp"
+  "LanaiGenInstrInfo.inc"
+  "LanaiGenInstrInfo.inc.tmp"
+  "LanaiGenMCCodeEmitter.inc"
+  "LanaiGenMCCodeEmitter.inc.tmp"
+  "LanaiGenRegisterInfo.inc"
+  "LanaiGenRegisterInfo.inc.tmp"
+  "LanaiGenSubtargetInfo.inc"
+  "LanaiGenSubtargetInfo.inc.tmp"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/LLVMLanaiCodeGen.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

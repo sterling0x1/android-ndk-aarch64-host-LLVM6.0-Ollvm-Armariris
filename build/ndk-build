@@ -1,0 +1,135 @@
+#!/bin/bash
+#
+# Copyright (C) 2010 The Android Open Source Project
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+#  This shell script is a wrapper to launch the NDK build from the
+#  command-line inside an application project path.
+#
+#  Typical usage is:
+#
+#     cd $PROJECT_PATH
+#     ndk-build
+#
+#  Assuming that the Android NDK root path is in your PATH. However,
+#  you can also invoke it directly as:
+#
+#     $NDK_ROOT/ndk-build
+#
+#  This really is a tiny wrapper around GNU Make.
+#
+
+# Ensure we get the full path of this script's directory
+# this is needed if the caller uses the -C <path> GNU Make
+# option, as in:
+#
+#    cd ndk
+#    ./ndk-build -C <project-path>
+#
+PROGDIR=`dirname $0`
+PROGDIR=`cd $PROGDIR && pwd -P`
+ANDROID_NDK_ROOT=$PROGDIR/..
+
+# Check if absolute NDK path contain space
+#
+case $PROGDIR in
+    *\ *) echo "ERROR: NDK path cannot contain space"
+          exit 1
+        ;;
+esac
+
+# If NDK_LOG is set to 1 or true in the environment, or the command-line
+# then enable log messages below
+if [ -z "$NDK_LOG" ]; then
+  NDK_LOG=0
+fi
+
+if [ -z "$NDK_ANALYZE" ]; then
+  NDK_ANALYZE=0
+fi
+
+PROJECT_PATH=
+PROJECT_PATH_NEXT=
+NDK_ANALYZER_OUT=
+for opt; do
+    if [ -z "$PROJECT_PATH" -a "$PROJECT_PATH_NEXT" = "yes" ] ; then
+        PROJECT_PATH=$opt
+        PROJECT_PATH_NEXT=
+    else
+        case $opt in
+          NDK_LOG=1|NDK_LOG=true)
+            NDK_LOG=1
+            ;;
+          NDK_LOG=*)
+            NDK_LOG=0
+            ;;
+          NDK_ANALYZE=1|NDK_ANALYZE=true)
+            NDK_ANALYZE=1
+            ;;
+          NDK_ANALYZE=*)
+            NDK_ANALYZE=0
+            ;;
+          NDK_ANALYZER_OUT=*)
+            NDK_ANALYZER_OUT=${opt#NDK_ANALYZER_OUT=}
+            ;;
+          NDK_TOOLCHAIN_VERSION=*)
+            NDK_TOOLCHAIN_VERSION=${opt#NDK_TOOLCHAIN_VERSION=}
+            ;;
+          APP_ABI=*)
+            APP_ABI=${opt#APP_ABI=}
+            ;;
+          -C)
+            PROJECT_PATH_NEXT="yes"
+            ;;
+        esac
+    fi
+done
+
+if [ "$NDK_LOG" = "true" ]; then
+  NDK_LOG=1
+fi
+
+if [ "$NDK_ANALYZE" = "true" ]; then
+  NDK_ANALYZE=1
+fi
+
+if [ "$NDK_LOG" = "1" ]; then
+  log () {
+    echo "$@"
+  }
+else
+  log () {
+    : # nothing
+  }
+fi
+
+# Detect host operating system and architecture
+# The 64-bit / 32-bit distinction gets tricky on Linux and Darwin because
+# uname -m returns the kernel's bit size, and it's possible to run with
+# a 64-bit kernel and a 32-bit userland.
+#
+HOST_OS=linux
+log "HOST_OS=$HOST_OS"
+
+HOST_ARCH=arm64
+log "HOST_ARCH=$HOST_ARCH"
+
+# Detect 32-bit userland on 64-bit kernels
+HOST_TAG="$HOST_OS-$HOST_ARCH"
+# Otherwise use the prebuilt version for our host tag, if it exists
+# Note: we intentionally do not provide prebuilt make binaries for Cygwin
+# or MSys.
+export LD_LIBRARY_PATH=$ANDROID_NDK_ROOT/prebuilt/$HOST_TAG/lib
+$ANDROID_NDK_ROOT/prebuilt/$HOST_TAG/bin/make -f $PROGDIR/core/build-local.mk "$@"
+
