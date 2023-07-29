@@ -9,7 +9,7 @@ To use it, clone the git to kali nethunter main folder, or anywhere you want rea
 your path should be: 
 /data/local/nhsystem/kali-arm64/
 
-so open keli terminal:
+so open kali terminal:
 
 cd ..
 
